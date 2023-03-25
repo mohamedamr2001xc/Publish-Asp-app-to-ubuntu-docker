@@ -1,0 +1,17 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: docker build
+        run: echo 'Admin12' | sudo -S docker built -t github_image .
+
+      - name: docker publish
+        run: echo 'Admin12' | sudo -S docker run -d -p 80:80 --name github_container github_image
